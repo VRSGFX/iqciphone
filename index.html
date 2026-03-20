@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>IQC iPhone · GojoVipApp</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background: #0A0A0F;
+            color: #FFFFFF;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 500px;
+            width: 100%;
+        }
+
+        /* Animasi */
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 51, 71, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(255, 51, 71, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 51, 71, 0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* HEADER */
+        .header {
+            margin-bottom: 20px;
+            animation: slideDown 0.5s ease;
+        }
+
+        .brand h1 {
+            font-size: 28px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff, #FF3347);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .brand p {
+            font-size: 12px;
+            color: #8A94A6;
+            margin-top: 2px;
+        }
+
+        /* BANNER - PALING ATAS */
+        .banner {
+            position: relative;
+            height: 140px;
+            border-radius: 24px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            animation: scaleIn 0.6s ease;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease;
+        }
+
+        .banner:hover {
+            transform: translateY(-5px);
+        }
+
+        .banner-img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://files.catbox.moe/288fco.jpg');
+            background-size: cover;
+            background-position: center;
+            filter: blur(4px);
+            transform: scale(1.1);
+            transition: transform 10s ease;
+        }
+
+        .banner:hover .banner-img {
+            transform: scale(1.2);
+        }
+
+        .banner-overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 51, 71, 0.5), rgba(0, 0, 0, 0.8));
+            z-index: 1;
+        }
+
+        .banner-content {
+            position: relative;
+            z-index: 2;
+            padding: 20px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .banner-text h2 {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 5px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .banner-text p {
+            color: #F5F7FA;
+            font-size: 13px;
+        }
+
+        .text-red {
+            color: #FF3347;
+            font-weight: 700;
+        }
+
+        .banner-stats {
+            display: flex;
+            gap: 10px;
+        }
+
+        .banner-stat {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 6px 12px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            transition: all 0.3s ease;
+        }
+
+        .banner-stat:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 51, 71, 0.2);
+        }
+
+        .banner-stat i {
+            color: #FF3347;
+        }
+
+        /* INFO CARD */
+        .info-card {
+            background: #121218;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 51, 71, 0.2);
+            animation: slideUp 0.5s ease 0.1s both;
+            transition: all 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-3px);
+            border-color: #FF3347;
+            box-shadow: 0 10px 25px rgba(255, 51, 71, 0.1);
+        }
+
+        .info-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .info-header i {
+            font-size: 24px;
+            color: #FF3347;
+            animation: pulse 2s infinite;
+        }
+
+        .info-header h2 {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .info-desc {
+            font-size: 14px;
+            color: #8A94A6;
+            margin-bottom: 15px;
+            padding-left: 36px;
+        }
+
+        .info-stats {
+            display: flex;
+            gap: 15px;
+        }
+
+        .info-stat {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 12px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .info-stat:hover {
+            background: rgba(255, 51, 71, 0.1);
+            transform: scale(1.02);
+        }
+
+        .info-stat span {
+            font-size: 11px;
+            color: #8A94A6;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .info-stat strong {
+            font-size: 16px;
+            color: #FF3347;
+        }
+
+        /* INPUT CARD */
+        .input-card {
+            background: #121218;
+            border-radius: 20px;
+            padding: 20px;
+            border: 1px solid rgba(255, 51, 71, 0.2);
+            animation: slideUp 0.5s ease 0.15s both;
+            transition: all 0.3s ease;
+        }
+
+        .input-card:hover {
+            border-color: #FF3347;
+        }
+
+        .input-box {
+            margin-bottom: 15px;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-wrapper i {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #8A94A6;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .cyber-input {
+            width: 100%;
+            padding: 14px 14px 14px 45px;
+            background: #0A0A0F;
+            border: 1px solid rgba(255, 51, 71, 0.3);
+            border-left: 3px solid #FF3347;
+            border-radius: 16px;
+            color: #FFFFFF;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .cyber-input:focus {
+            outline: none;
+            border-color: #FF3347;
+            box-shadow: 0 0 20px rgba(255, 51, 71, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .cyber-input:focus + i {
+            color: #FF3347;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        /* TOMBOL BUAT GAMBAR */
+        .generate-btn {
+            width: 100%;
+            padding: 16px;
+            background: #FF3347;
+            border: none;
+            border-radius: 16px;
+            color: white;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+        .generate-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .generate-btn:hover::before {
+            left: 100%;
+        }
+
+        .generate-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 51, 71, 0.4);
+        }
+
+        .generate-btn:active {
+            transform: translateY(0);
+        }
+
+        .generate-btn i {
+            font-size: 18px;
+        }
+
+        /* LOADING */
+        .loading {
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .spinner {
+            width: 30px;
+            height: 30px;
+            border: 3px solid rgba(255, 51, 71, 0.1);
+            border-top: 3px solid #FF3347;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* RESULT CARD */
+        .result-card {
+            background: #121218;
+            border-radius: 20px;
+            padding: 20px;
+            margin-top: 20px;
+            border: 1px solid rgba(255, 51, 71, 0.2);
+            display: none;
+            animation: slideUp 0.5s ease;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .result-card.active {
+            display: block;
+        }
+
+        .result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .result-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #FF3347;
+        }
+
+        .result-title i {
+            animation: pulse 2s infinite;
+        }
+
+        .result-img {
+            width: 100%;
+            border-radius: 16px;
+            margin-bottom: 15px;
+            border: 1px solid rgba(255, 51, 71, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .result-img:hover {
+            transform: scale(1.02);
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .download-btn {
+            flex: 1;
+            padding: 12px;
+            background: #FF3347;
+            border: none;
+            border-radius: 14px;
+            color: white;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 51, 71, 0.3);
+        }
+
+        .back-btn {
+            flex: 1;
+            padding: 12px;
+            background: rgba(255, 51, 71, 0.1);
+            border: 1px solid rgba(255, 51, 71, 0.3);
+            border-radius: 14px;
+            color: #FF3347;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 51, 71, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* FOOTER */
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 12px;
+            color: #8A94A6;
+            animation: slideUp 0.5s ease 0.2s both;
+        }
+
+        .footer span {
+            color: #FF3347;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .footer span:hover {
+            text-shadow: 0 0 10px #FF3347;
+        }
+
+        /* BOTTOM BAR */
+        .bottom-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #121218;
+            border-top: 1px solid rgba(255, 51, 71, 0.3);
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            animation: slideUp 0.5s ease;
+        }
+
+        .logo-app {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .logo-app:hover {
+            transform: translateX(5px);
+        }
+
+        .logo-app i {
+            font-size: 22px;
+            color: #FF3347;
+            animation: pulse 2s infinite;
+        }
+
+        .logo-app span {
+            font-size: 15px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .status-badge-bottom {
+            background: rgba(255, 51, 71, 0.1);
+            border: 1px solid rgba(255, 51, 71, 0.3);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            color: #FF3347;
+            transition: all 0.3s ease;
+        }
+
+        .status-badge-bottom:hover {
+            background: rgba(255, 51, 71, 0.2);
+            transform: scale(1.05);
+        }
+
+        /* TOAST */
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 3000;
+        }
+
+        .toast {
+            background: #121218;
+            border-left: 4px solid #FF3347;
+            border-radius: 12px;
+            padding: 12px 16px;
+            min-width: 250px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 51, 71, 0.3);
+            margin-bottom: 10px;
+            transform: translateX(120%);
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+
+        .toast.warning {
+            border-left-color: #FFA500;
+        }
+
+        .toast-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 5px;
+        }
+
+        .toast-header i {
+            font-size: 16px;
+            color: #FF3347;
+        }
+
+        .toast.warning .toast-header i {
+            color: #FFA500;
+        }
+
+        .toast-header h4 {
+            font-size: 13px;
+            font-weight: 600;
+            color: #FF3347;
+        }
+
+        .toast.warning .toast-header h4 {
+            color: #FFA500;
+        }
+
+        .toast p {
+            font-size: 12px;
+            color: #8A94A6;
+            margin-left: 26px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- BANNER PALING ATAS -->
+        <div class="banner">
+            <div class="banner-img"></div>
+            <div class="banner-overlay"></div>
+            <div class="banner-content">
+                <div class="banner-text">
+                    <h2>IQC <span class="text-red">iPhone</span></h2>
+                    <p>Buat quote iPhone keren</p>
+                </div>
+                <div class="banner-stats">
+                    <div class="banner-stat">
+                        <i class="fa-regular fa-clock"></i>
+                        <span>GRATIS</span>
+                    </div>
+                    <div class="banner-stat">
+                        <i class="fa-solid fa-bolt"></i>
+                        <span>CEPAT</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- HEADER -->
+        <div class="header">
+            <div class="brand">
+                <h1>IQC IPHONE</h1>
+                <p>GojoVipApp · Quote Generator</p>
+            </div>
+        </div>
+
+        <!-- INFO CARD -->
+        <div class="info-card">
+            <div class="info-header">
+                <i class="fa-solid fa-circle-info"></i>
+                <h2>INFORMASI</h2>
+            </div>
+            <div class="info-desc">
+                Buat quote iPhone dengan tampilan notifikasi seperti aslinya. Isi data di bawah ini.
+            </div>
+            <div class="info-stats">
+                <div class="info-stat">
+                    <span>STATUS</span>
+                    <strong>ONLINE</strong>
+                </div>
+                <div class="info-stat">
+                    <span>STYLE</span>
+                    <strong>APPLE</strong>
+                </div>
+            </div>
+        </div>
+
+        <!-- INPUT CARD -->
+        <div class="input-card">
+            <div class="input-box">
+                <div class="input-wrapper">
+                    <i class="fa-regular fa-clock"></i>
+                    <input type="text" class="cyber-input" id="time" placeholder="Jam (contoh: 18:00)">
+                </div>
+            </div>
+
+            <div class="input-box">
+                <div class="input-wrapper">
+                    <i class="fa-solid fa-battery-full"></i>
+                    <input type="number" class="cyber-input" id="battery" placeholder="Baterai (%)" min="0" max="100">
+                </div>
+            </div>
+
+            <div class="input-box">
+                <div class="input-wrapper">
+                    <i class="fa-solid fa-sim-card"></i>
+                    <input type="text" class="cyber-input" id="carrier" placeholder="Merek Kartu (contoh: Indosat)">
+                </div>
+            </div>
+
+            <div class="input-box">
+                <div class="input-wrapper">
+                    <i class="fa-regular fa-message"></i>
+                    <input type="text" class="cyber-input" id="message" placeholder="Teks Pesan">
+                </div>
+            </div>
+
+            <button class="generate-btn" id="generateBtn">
+                <i class="fa-solid fa-mobile-screen-button"></i>
+                BUAT GAMBAR
+            </button>
+
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p style="color: #8A94A6; font-size: 13px;">Memproses gambar...</p>
+            </div>
+        </div>
+
+        <!-- RESULT CARD -->
+        <div class="result-card" id="resultCard">
+            <div class="result-header">
+                <div class="result-title">
+                    <i class="fa-solid fa-image"></i>
+                    <span>Hasil Gambar</span>
+                </div>
+            </div>
+            <img class="result-img" id="hasilImg" src="" alt="Hasil IQC iPhone">
+            <div class="btn-group">
+                <a id="downloadBtn" class="download-btn" download="iqc-iphone.jpg">
+                    <i class="fa-solid fa-download"></i>
+                    Download
+                </a>
+                <button class="back-btn" id="backBtn">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    Kembali
+                </button>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="footer">
+            © 2026 · <span>GojoVipApp</span>
+        </div>
+    </div>
+
+    <!-- BOTTOM BAR -->
+    <div class="bottom-bar">
+        <div class="logo-app">
+            <i class="fa-solid fa-mobile-screen-button"></i>
+            <span>IQC IPHONE</span>
+        </div>
+        <div class="status-badge-bottom">
+            <i class="fa-solid fa-circle"></i> READY
+        </div>
+    </div>
+
+    <!-- TOAST CONTAINER -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script>
+        // Toast
+        const toastContainer = document.getElementById('toastContainer');
+        
+        function showToast(message, type = 'info') {
+            const toast = document.createElement('div');
+            toast.className = `toast ${type === 'warning' ? 'warning' : ''}`;
+            
+            const icon = type === 'warning' ? 'fa-triangle-exclamation' : 'fa-circle-info';
+            const title = type === 'warning' ? 'PERINGATAN' : 'INFORMASI';
+            
+            toast.innerHTML = `
+                <div class="toast-header">
+                    <i class="fa-solid ${icon}"></i>
+                    <h4>${title}</h4>
+                </div>
+                <p>${message}</p>
+            `;
+            
+            toastContainer.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.classList.add('show');
+            }, 10);
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => {
+                    toast.remove();
+                }, 300);
+            }, 3000);
+        }
+
+        // Elements
+        const generateBtn = document.getElementById('generateBtn');
+        const backBtn = document.getElementById('backBtn');
+        const loading = document.getElementById('loading');
+        const resultCard = document.getElementById('resultCard');
+        const hasilImg = document.getElementById('hasilImg');
+        const downloadBtn = document.getElementById('downloadBtn');
+        
+        const timeInput = document.getElementById('time');
+        const batteryInput = document.getElementById('battery');
+        const carrierInput = document.getElementById('carrier');
+        const messageInput = document.getElementById('message');
+
+        let currentImageUrl = '';
+
+        function buatGambar() {
+            const time = timeInput.value.trim();
+            const battery = batteryInput.value.trim();
+            const carrier = carrierInput.value.trim();
+            const message = messageInput.value.trim();
+            
+            if (!time) {
+                showToast('Masukkan jam!', 'warning');
+                return;
+            }
+            
+            if (!battery) {
+                showToast('Masukkan baterai!', 'warning');
+                return;
+            }
+            
+            if (parseInt(battery) < 0 || parseInt(battery) > 100) {
+                showToast('Baterai harus 0-100!', 'warning');
+                return;
+            }
+            
+            if (!carrier) {
+                showToast('Masukkan merek kartu!', 'warning');
+                return;
+            }
+            
+            if (!message) {
+                showToast('Masukkan teks pesan!', 'warning');
+                return;
+            }
+            
+            // Show loading
+            loading.style.display = 'block';
+            resultCard.classList.remove('active');
+            generateBtn.disabled = true;
+            generateBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> MEMPROSES...';
+            
+            const encodedMessage = encodeURIComponent(message);
+            const url = `https://brat.siputzx.my.id/iphone-quoted?time=${encodeURIComponent(time)}&batteryPercentage=${battery}&carrierName=${encodeURIComponent(carrier)}&messageText=${encodedMessage}&emojiStyle=apple`;
+            
+            currentImageUrl = url;
+            hasilImg.src = url;
+            
+            hasilImg.onload = () => {
+                downloadBtn.href = url;
+                loading.style.display = 'none';
+                resultCard.classList.add('active');
+                generateBtn.disabled = false;
+                generateBtn.innerHTML = '<i class="fa-solid fa-mobile-screen-button"></i> BUAT GAMBAR';
+                showToast('Gambar berhasil dibuat!');
+            };
+            
+            hasilImg.onerror = () => {
+                loading.style.display = 'none';
+                generateBtn.disabled = false;
+                generateBtn.innerHTML = '<i class="fa-solid fa-mobile-screen-button"></i> BUAT GAMBAR';
+                showToast('Gagal memuat gambar, coba lagi!', 'warning');
+            };
+        }
+
+        function kembali() {
+            resultCard.classList.remove('active');
+            // Reset form
+            timeInput.value = '';
+            batteryInput.value = '';
+            carrierInput.value = '';
+            messageInput.value = '';
+        }
+
+        // Event listeners
+        generateBtn.addEventListener('click', buatGambar);
+        backBtn.addEventListener('click', kembali);
+        
+        // Enter key support
+        const inputs = [timeInput, batteryInput, carrierInput, messageInput];
+        inputs.forEach(input => {
+            input.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') buatGambar();
+            });
+        });
+    </script>
+</body>
+</html>
